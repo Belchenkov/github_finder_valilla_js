@@ -3,7 +3,9 @@
         this.profile = document.getElementById('profile');
     }
 
+    // Display Profile in UI
     showProfile(user) {
+        this.clearAlert();
         this.profile.innerHTML = `
             <div class="card card-body mb-3">
                 <div class="row">
@@ -30,4 +32,40 @@
             <div id="repos"></div>
         `;
     }
+    // Show alert message
+     showAlert(message, className) {
+        // Clear any remaining alerts
+         this.clearAlert();
+
+        // Create DIV
+         const div = document.createElement('div');
+         div.className = className;
+         // Add Text
+         div.appendChild(document.createTextNode(message));
+         // Get Parent
+         const container = document.querySelector('.searchContainer');
+         // Get search Box
+         const search = document.querySelector('.search');
+         // Insert alert
+         container.insertBefore(div, search);
+
+         // Timeout after 3 sec
+         setTimeout(() => {
+            this.clearAlert();
+         }, 3000)
+     }
+
+     // Clear alert Message
+     clearAlert() {
+        const currentAlert = document.querySelector('.alert');
+
+        if (currentAlert) {
+            currentAlert.remove();
+        }
+     }
+
+     // Clear Profile Block
+     clearProfile() {
+        this.profile.innerHTML = '';
+     }
  }
